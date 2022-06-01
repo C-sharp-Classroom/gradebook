@@ -37,4 +37,19 @@ https://app.pluralsight.com/library/courses/csharp-fundamentals-dev/table-of-con
 3. 透過 dotnet runtime 去執行 dll 
 
 
+## 專案 class Diagram
 
+```mermaid
+classDiagram
+Program ..> Book: Dependency
+class Program {
+  Main(List<string> args)$
+}
+class Book {
+  -List~double~grades
+  -string name
+  +Book(string name)
+  +AddGrade(double grade)
+  +ShowStatistics()
+}
+```
