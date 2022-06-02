@@ -53,3 +53,50 @@ class Book {
   +ShowStatistics()
 }
 ```
+## 新增 UnitTest
+
+### 1 建構 Test folder
+
+```sh
+cd test
+mkdir GradeBook.Test
+```
+
+### 2 初始化 XUnit Project with dotnet cli
+
+```sh
+cd GradeBook.Test
+dotnet new xunit
+```
+
+### 3 把要測試的專案 .csproj file 加入 reference
+
+```sh
+dotnet add reference $reference_csproj_path
+```
+
+### 4 撰寫 Test code
+
+```csharp
+using Xunit;
+namespace GradeBook.Tests;
+
+public class BookTests
+{
+  [Fact]
+  public void TestStatistics()
+  {
+    // arrange
+    var book = new Book("");
+    book.AddGrade(89.1);
+    book.AddGrade(90.5);
+    book.AddGrade(77.3);
+    // act
+    var result = book.GetStatistics();
+    // assert
+    Assert.Equal(85.6, result.Average, 1);
+    Assert.Equal(90.5, result.High, 1);
+    Assert.Equal(77.3, result.Low, 1);
+  }
+}
+```
