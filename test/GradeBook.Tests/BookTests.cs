@@ -4,7 +4,7 @@ namespace GradeBook.Tests;
 public class BookTests
 {
     [Fact]
-    public void TestStatistics()
+    public void BookCalculatesAnAverageGrade()
     {
         // arrange
         var book = new Book("");
