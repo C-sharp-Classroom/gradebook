@@ -100,3 +100,34 @@ public class BookTests
   }
 }
 ```
+
+## 建立 solution 檔案來管理多個專案檔
+
+原本的案例中 
+
+每次要執行對應的檔案必須跑到該檔案對應的資料夾才能執行 dotnet cli 指令
+
+不是很方便的作法
+
+而 .NET 專案一個管理多個專案的一個作法就是透過 solution 檔案來做這件事情
+
+### 1. 建立 sln 檔案
+
+```shell=
+dotnet new sln
+```
+
+### 2. 加入 sln 所要管理的 .csproj 檔案
+
+```shell=
+dotnet sln add $csproj_path
+```
+
+for example
+
+```shell=
+dotnet sln add src/GradeBook/GradeBook.csproj
+dotnet sln add test/GradeBook.Tests/GradeBook.Tests.csproj
+```
+
+現在就可以直接在 gradebook 資料夾下 dotnet cli 指令了
