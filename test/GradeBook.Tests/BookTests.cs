@@ -17,19 +17,20 @@ public class BookTests
         Assert.Equal(85.6, result.Average, 1);
         Assert.Equal(90.5, result.High, 1);
         Assert.Equal(77.3, result.Low, 1);
+        Assert.Equal('B', result.Letter);
     }
 
     [Fact]
     public void BookGradeShowBeInRange() {
         // arrange
         var book = new Book("");
-        var ex = Assert.Throws<Exception>(
+        var ex = Assert.Throws<ArgumentException>(
             () => {
                 // act
                 book.AddGrade(105);
             }
         );
         // assert
-        Assert.Equal("Invalid Value" ,ex.Message);
+        Assert.Equal("Invalid grade" ,ex.Message);
     }
 }
