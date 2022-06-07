@@ -7,7 +7,12 @@ namespace GradeBook
             Name = name;
         }
         public void AddGrade(double grade) {
-            grades.Add(grade);
+            if (grade <= 100 && grade >= 0) {
+                grades.Add(grade);
+            } else {
+                throw new Exception("Invalid Value");
+                // Console.WriteLine("Invalid Value");
+            }
         }
         public Statistics GetStatistics() {
             var result = new Statistics();
