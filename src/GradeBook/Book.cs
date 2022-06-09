@@ -1,12 +1,14 @@
 namespace GradeBook
 {
+    public delegate void GradeAddedDelegate(object sender, EventArgs args); 
     public class Book
     {
         public Book(string name) {
             grades = new List<double>();
             Name = name;
         }
-        public void AddLetterGrade(char letter) {
+        
+        public void AddGrade(char letter) {
             switch(letter) {
                 case 'A':
                         AddGrade(90);
@@ -25,6 +27,9 @@ namespace GradeBook
         public void AddGrade(double grade) {
             if (grade <= 100 && grade >= 0) {
                 grades.Add(grade);
+                if (GradeAdded != null) {
+                    GradeAdded(this, new EventArgs());
+                }
             } else {
                 throw new ArgumentException($"Invalid {nameof(grade)}");
             }
@@ -60,6 +65,12 @@ namespace GradeBook
             return result;
         }
         private List<double> grades;
-        public string Name;
+        
+        public event GradeAddedDelegate GradeAdded;
+        public string Name {
+            get; 
+            set;
+        }
+        const string category = "Science";
     }
 }
