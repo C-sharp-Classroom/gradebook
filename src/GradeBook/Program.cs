@@ -28,8 +28,10 @@ namespace GradeBook
         }
         try
         {
-          var inputGrade = double.Parse(input);
-          book.AddGrade(inputGrade);
+          if (input != null) {
+            var inputGrade = double.Parse(input);
+            book.AddGrade(inputGrade);
+          }
         }
         catch (ArgumentException ex)
         {
