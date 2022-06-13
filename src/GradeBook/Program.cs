@@ -2,29 +2,12 @@
 namespace GradeBook
 {
   class Program {
-    static void Main(string[] args) {
-      var book = new Book("Gson's grade book");
+    static void Main(string[] args)
+    {
+      IBook book = new DiskBook("Gson's grade book");
       book.GradeAdded += OnGradeAdded;
-      book.GradeAdded += OnGradeAdded;
-      book.GradeAdded -= OnGradeAdded;
-      book.GradeAdded += OnGradeAdded;
-      while(true) {
-        Console.WriteLine("Enter Grade or 'q' to quit:");
-        var input = Console.ReadLine();
-        if (input == "q") {
-          break;
-        }
-        try {
-          var inputGrade = double.Parse(input);
-          book.AddGrade(inputGrade);
-        } catch (ArgumentException ex) {
-          Console.WriteLine(ex.Message);
-        } catch (FormatException ex) {
-          Console.WriteLine(ex.Message);
-        } finally {
-          Console.WriteLine("**");
-        }
-      } 
+
+      EnterGrades(book);
       var stats = book.GetStatistics();
       Console.WriteLine($"The gradebook Name is {book.Name}");
       Console.WriteLine($"The highest grade is {stats.High}");
@@ -32,7 +15,37 @@ namespace GradeBook
       Console.WriteLine($"The average grade is {stats.Average:N1}");
       Console.WriteLine($"The letter grade is {stats.Letter}");
     }
-  
+
+    private static void EnterGrades(IBook book)
+    {
+      while (true)
+      {
+        Console.WriteLine("Enter Grade or 'q' to quit:");
+        var input = Console.ReadLine();
+        if (input == "q")
+        {
+          break;
+        }
+        try
+        {
+          var inputGrade = double.Parse(input);
+          book.AddGrade(inputGrade);
+        }
+        catch (ArgumentException ex)
+        {
+          Console.WriteLine(ex.Message);
+        }
+        catch (FormatException ex)
+        {
+          Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+          Console.WriteLine("**");
+        }
+      }
+    }
+
     static void OnGradeAdded(object sender, EventArgs e) {
       Console.WriteLine("A grade is Added");
     }
